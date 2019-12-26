@@ -1,5 +1,6 @@
 export default {
   MAX_ATTACHMENT_SIZE: 5000000,
+  STRIPE_KEY: "pk_test_piJzospGp3LWYAnIewrHqtMj00vm92Bl4A",
   s3: {
     REGION: "us-east-1",
     BUCKET: "shaun-elam-notes-app-uploads"

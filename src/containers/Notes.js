@@ -4,7 +4,7 @@ import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import config from "../config";
 import "./Notes.css";
-import { s3Upload } from "../libs/awsLib";
+import { s3Upload, s3Remove } from "../libs/awsLib";
 
 export default function Notes(props) {
     const file = useRef(null);
@@ -72,6 +72,9 @@ export default function Notes(props) {
   
     try {
       if (file.current) {
+        if(note.attachment){
+          await s3Remove(note.attachment);
+        }
         attachment = await s3Upload(file.current);
       }
   
@@ -104,6 +107,11 @@ export default function Notes(props) {
     setIsDeleting(true);
   
     try {
+      //also delete the attachment
+      if(note.attachment){
+        await s3Remove(note.attachment);
+      }
+      //Deletes the note
       await deleteNote();
       props.history.push("/");
     } catch (e) {

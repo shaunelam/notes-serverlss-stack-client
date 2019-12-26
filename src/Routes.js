@@ -8,23 +8,40 @@ import ResetPassword from "./containers/ResetPassword";
 import Signup from "./containers/Signup";
 import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
-import Settings from "./containers/Settings";
+import Billing from "./containers/Billing";
 import ChangePassword from "./containers/ChangePassword";
 import ChangeEmail from "./containers/ChangeEmail";
 import NewNote from "./containers/NewNote";
 import Notes from "./containers/Notes";
+import Settings from "./containers/Settings";
 
 export default function Routes({ appProps }) {
   return (
     <Switch>
       <AppliedRoute path="/" exact component={Home} appProps={appProps} />
-      <AppliedRoute path="/login" exact component={Login} appProps={appProps} />
-      <AppliedRoute path="/notes/new" exact component={NewNote} appProps={appProps} />
-      <AppliedRoute path="/notes/:id" exact component={Notes} appProps={appProps} />
-      <AppliedRoute
+      <UnauthenticatedRoute path="/login" exact component={Login} appProps={appProps} />
+      <AuthenticatedRoute
+        path="/notes/new"
+        exact
+        component={NewNote}
+        appProps={appProps}
+      />
+      <AuthenticatedRoute
+        path="/notes/:id"
+        exact
+        component={Notes}
+        appProps={appProps}
+      />
+      <UnauthenticatedRoute
         path="/signup"
         exact
         component={Signup}
+        appProps={appProps}
+      />
+      <AuthenticatedRoute
+        path="/billing"
+        exact
+        component={Billing}
         appProps={appProps}
       />
       <AuthenticatedRoute
